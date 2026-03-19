@@ -5,17 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kannan Ramakrishnan | Resume</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    
     <style>
+        /* 1. RESET & BASE STYLES */
         :root {
             --primary: #1e40af;
             --text: #111827;
-            --light-text: #4b5563;
+            --light: #4b5563;
             --border: #e5e7eb;
         }
 
-        /* Essential Reset for PDF Accuracy */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -24,187 +22,186 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 40px 0;
         }
 
-        /* The Resume Container */
-        #resume-canvas {
-            width: 800px; /* Fixed width for consistent PDF scaling */
+        /* 2. THE RESUME CONTAINER (Web View) */
+        .resume-container {
+            width: 210mm; /* A4 Width */
+            min-height: 297mm; /* A4 Height */
             background: white;
-            padding: 30px;
+            padding: 15mm;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             color: var(--text);
             position: relative;
         }
 
-        /* Utility Button */
-        .controls {
-            margin-bottom: 20px;
-            position: sticky;
-            top: 10px;
-            z-index: 100;
-        }
-
-        .btn {
-            background: var(--primary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        /* Layout Styling */
+        /* 3. HEADER */
         header {
             display: flex;
             justify-content: space-between;
+            align-items: flex-start;
             border-bottom: 2px solid var(--primary);
-            padding-bottom: 15px;
+            padding-bottom: 12px;
             margin-bottom: 15px;
         }
 
-        .header-left h1 { font-size: 24pt; color: var(--primary); text-transform: uppercase; }
-        .header-right { text-align: right; font-size: 9pt; line-height: 1.4; }
-        .header-right a { color: var(--primary); text-decoration: none; }
+        .name-area h1 { font-size: 26pt; color: var(--primary); letter-spacing: -1px; line-height: 1; }
+        .name-area p { font-size: 11pt; font-weight: 600; margin-top: 5px; color: var(--light); }
 
-        section { margin-bottom: 12px; }
-        h2 { 
-            font-size: 11pt; 
-            text-transform: uppercase; 
-            color: var(--primary); 
+        .contact-area { text-align: right; font-size: 9pt; line-height: 1.5; }
+        .contact-area a { color: var(--primary); text-decoration: none; }
+
+        /* 4. SECTIONS */
+        section { margin-bottom: 15px; width: 100%; }
+        h2 {
+            font-size: 11pt;
+            text-transform: uppercase;
+            color: var(--primary);
             border-bottom: 1px solid var(--border);
             margin-bottom: 8px;
             padding-bottom: 2px;
+            letter-spacing: 0.5px;
         }
 
-        .summary { font-size: 9.5pt; text-align: justify; color: var(--light-text); margin-bottom: 10px; }
+        p.summary { font-size: 9.5pt; text-align: justify; line-height: 1.4; color: var(--light); }
 
-        .skills-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
-        .skills-table td { padding: 6px; border: 1px solid var(--border); font-size: 9pt; }
-        .bold-cell { background: #f9fafb; font-weight: 700; width: 25%; }
+        .skills-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
+        .skills-table td { padding: 6px 10px; border: 1px solid var(--border); font-size: 9pt; }
+        .skill-title { background: #f9fafb; font-weight: 700; width: 25%; }
 
-        .job { margin-bottom: 10px; }
-        .job-head { display: flex; justify-content: space-between; font-weight: 700; font-size: 10pt; }
-        .job-sub { display: flex; justify-content: space-between; font-style: italic; font-size: 9pt; color: var(--light-text); margin-bottom: 3px; }
+        .experience-item { margin-bottom: 12px; }
+        .exp-row-1 { display: flex; justify-content: space-between; font-weight: 700; font-size: 10pt; }
+        .exp-row-2 { display: flex; justify-content: space-between; font-style: italic; font-size: 9pt; color: var(--light); margin-bottom: 4px; }
         
         ul { padding-left: 18px; }
-        li { font-size: 9pt; color: var(--light-text); margin-bottom: 2px; }
+        li { font-size: 9pt; color: var(--light); margin-bottom: 3px; }
 
-        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .project-box { border: 1px solid var(--border); padding: 8px; border-radius: 4px; }
-        .project-box h4 { font-size: 9.5pt; color: var(--primary); }
-        .project-box p { font-size: 8.5pt; color: #666; }
+        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .project-card { border: 1px solid var(--border); padding: 8px; border-radius: 4px; }
+        .project-card h4 { font-size: 9.5pt; color: var(--primary); margin-bottom: 2px; }
+        .project-card p { font-size: 8.5pt; color: var(--light); }
 
-        /* Forces everything to stay on one page during PDF generation */
+        /* 5. DOWNLOAD BUTTON */
+        .no-print-btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* 6. PRINT LOGIC - This fixes your "Starting at Half Page" issue */
         @media print {
-            body { background: white; padding: 0; }
-            .controls { display: none; }
-            #resume-canvas { width: 100%; box-shadow: none; padding: 0; }
+            @page { size: A4; margin: 0; }
+            body { background: white; padding: 0; margin: 0; }
+            .no-print-btn { display: none; }
+            .resume-container {
+                width: 100%;
+                height: 100%;
+                box-shadow: none;
+                padding: 15mm; /* Controls the white space around the edges */
+                margin: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="controls">
-        <button class="btn" onclick="downloadResume()">Download Single Page PDF</button>
-    </div>
+    <button class="no-print-btn" onclick="window.print()">Download PDF (Press Save as PDF)</button>
 
-    <div id="resume-canvas">
+    <div class="resume-container">
         <header>
-            <div class="header-left">
-                <h1>KANNAN R</h1>
-                <p style="font-weight:600; font-size: 11pt;">Android Developer (4+ Years)</p>
+            <div class="name-area">
+                <h1>KANNAN R [cite: 1]</h1>
+                <p>Android Developer | 4+ Years Experience [cite: 2]</p>
             </div>
-            <div class="header-right">
-                <div>📞 7867952457</div>
-                <div>📧 <a href="mailto:kannanpvm007@gmail.com">kannanpvm007@gmail.com</a></div>
-                <div>🔗 GitHub | Playstore</div>
-                <div>📍 Coimbatore, Tamil Nadu</div>
+            <div class="contact-area">
+                <div>📞 7867952457 [cite: 3]</div>
+                <div>📧 <a href="mailto:kannanpvm007@gmail.com">kannanpvm007@gmail.com</a> [cite: 4]</div>
+                <div>🔗 GitHub | Playstore [cite: 5]</div>
+                <div>📍 Coimbatore, India</div>
             </div>
         </header>
 
         <section>
-            <h2>Professional Summary</h2>
+            <h2>Professional Summary [cite: 6]</h2>
             <p class="summary">
-                Results-driven Android Developer with 4+ years of experience specializing in <b>Kotlin, Jetpack Compose, MVVM, and Dagger-Hilt</b>. Expert in building scalable apps with Firebase, Stripe, and Google Maps SDK.
+                Dynamic and results-driven Android Developer with 4+ years of experience, specializing in modern mobile development using <b>Kotlin, Jetpack Compose, MVVM, and Dagger-Hilt</b>. [cite: 7] Proven expertise in building high-performance applications, integrating real-time data streaming (Kotlin Flow, Firebase), payment systems (Stripe), and location services. [cite: 8]
             </p>
         </section>
 
         <section>
-            <h2>Technical Skills</h2>
+            <h2>Technical Skills [cite: 9]</h2>
             <table class="skills-table">
-                <tr><td class="bold-cell">Mobile Dev</td><td>Kotlin, Jetpack Compose, MVVM, Flow, Material3</td></tr>
-                <tr><td class="bold-cell">Tools</td><td>Dagger-Hilt, Firebase, GitHub Actions, Google Maps SDK</td></tr>
-                <tr><td class="bold-cell">Backend</td><td>Spring MVC, MySQL, WebSocket, MQTT, Tomcat</td></tr>
+                <tr>
+                    <td class="skill-title">Mobile Development</td>
+                    <td>Kotlin, Jetpack Compose, MVVM, Kotlin Flow, Compose Navigation, Material3 [cite: 10]</td>
+                </tr>
+                <tr>
+                    <td class="skill-title">Tools & Tech</td>
+                    <td>Dagger-Hilt, Google Maps SDK, Firebase (Firestore, Remote Config), GitHub Actions, Git [cite: 10]</td>
+                </tr>
+                <tr>
+                    <td class="skill-title">Backend & DB</td>
+                    <td>Spring MVC, MySQL 5.0, Tomcat 8.5, WebSocket, MQTT [cite: 11, 12]</td>
+                </tr>
             </table>
         </section>
 
         <section>
-            <h2>Experience</h2>
-            <div class="job">
-                <div class="job-head"><span>Orane Healthcare India Pvt Ltd</span><span>Oct 2021 – Present</span></div>
-                <div class="job-sub"><span>Android Developer</span><span>Coimbatore</span></div>
+            <h2>Professional Experience [cite: 13]</h2>
+            <div class="experience-item">
+                <div class="exp-row-1"><span>Orane Healthcare India Pvt Ltd [cite: 15]</span><span>Oct 2021 - Present [cite: 16]</span></div>
+                <div class="exp-row-2"><span>Android Developer [cite: 14]</span><span>Coimbatore [cite: 16]</span></div>
                 <ul>
-                    <li>Developed healthcare apps using <b>Jetpack Compose</b> & <b>MVVM</b>.</li>
-                    <li>Integrated <b>Firestore</b> for real-time data and <b>Maps SDK</b> for location services.</li>
-                    <li>Optimized dependency injection using <b>Dagger-Hilt</b>.</li>
+                    <li>Spearheaded development using Jetpack Compose and MVVM architecture. [cite: 17]</li>
+                    <li>Integrated Firebase Firestore for real-time telemedicine data management. [cite: 18]</li>
+                    <li>Implemented Google Maps SDK and Firebase Remote Config for dynamic UI updates. [cite: 19]</li>
                 </ul>
             </div>
 
-            <div class="job">
-                <div class="job-head"><span>Dotworld Technologies</span><span>Nov 2020 – Sep 2021</span></div>
-                <div class="job-sub"><span>Android Developer</span><span>Coimbatore</span></div>
+            <div class="experience-item">
+                <div class="exp-row-1"><span>Dotworld Technologies [cite: 22]</span><span>Nov 2020 - Sep 2021 [cite: 21]</span></div>
+                <div class="exp-row-2"><span>Android Developer [cite: 20]</span><span>Coimbatore [cite: 23]</span></div>
                 <ul>
-                    <li>Built Clean Architecture apps and handled <b>WebSocket/MQTT</b> protocols.</li>
+                    <li>Developed clean-architecture applications using Dagger-Hilt. [cite: 24]</li>
+                    <li>Implemented WebSocket and MQTT for real-time communication protocols. [cite: 25]</li>
                 </ul>
             </div>
 
-            <div class="job" style="margin-bottom: 0;">
-                <div class="job-head"><span>Anna Silicon Technology</span><span>Nov 2019 – Nov 2020</span></div>
-                <div class="job-sub"><span>Java Developer</span><span>Kumbakonam</span></div>
+            <div class="experience-item">
+                <div class="exp-row-1"><span>Anna Silicon Technology [cite: 27]</span><span>Nov 2019 - Nov 2020 [cite: 28]</span></div>
+                <div class="exp-row-2"><span>Java Developer [cite: 26]</span><span>Kumbakonam [cite: 29]</span></div>
                 <ul>
-                    <li>Managed backend development using <b>Spring MVC</b> and <b>MySQL</b>.</li>
+                    <li>Backend development focusing on Spring MVC and database optimization.</li>
                 </ul>
             </div>
         </section>
 
         <section>
-            <h2>Key Projects</h2>
+            <h2>Key Mobile Projects</h2>
             <div class="project-grid">
-                <div class="project-box"><h4>iCliniq Suite</h4><p>Firebase, Compose, Maps SDK</p></div>
-                <div class="project-box"><h4>iCliniq First</h4><p>Kotlin, MVVM, Stripe Integration</p></div>
-                <div class="project-box"><h4>VDT Terminal</h4><p>Twilio Video Communication</p></div>
-                <div class="project-box"><h4>Restaurant Robot</h4><p>Android ML Kit & Dialogflow</p></div>
+                <div class="project-card"><h4>iCliniq Telemedicine</h4><p>Firebase, Compose, Maps SDK</p></div>
+                <div class="project-card"><h4>iCliniq First</h4><p>Kotlin, MVVM, Stripe Integration</p></div>
+                <div class="project-card"><h4>VDT Terminal</h4><p>Twilio Real-time Video</p></div>
+                <div class="project-card"><h4>Restaurant Robot</h4><p>ML Kit & Google Dialogflow</p></div>
             </div>
         </section>
 
         <section>
             <h2>Education</h2>
-            <div class="job-head"><span>BCA (Computer Applications)</span><span>2019</span></div>
-            <div class="job-sub"><span>Marudupandiyar College, Thanjavur</span></div>
+            <div class="exp-row-1"><span>BCA (Computer Applications)</span><span>2019</span></div>
+            <div class="exp-row-2"><span>Marudupandiyar College, Thanjavur</span></div>
         </section>
     </div>
 
-    <script>
-        function downloadResume() {
-            const element = document.getElementById('resume-canvas');
-            const opt = {
-                margin:       0,
-                filename:     'Kannan_R_Resume.pdf',
-                image:        { type: 'jpeg', quality: 1 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
-                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-
-            // This tells html2pdf to fit the content into a single page
-            html2pdf().set(opt).from(element).toPdf().get('pdf').then(function (pdf) {
-                var totalPages = pdf.internal.getNumberOfPages();
-                for (var i = totalPages; i > 1; i--) {
-                    pdf.deletePage(i); // Delete extra pages if any are generated
-                }
-            }).save();
-        }
-    </script>
 </body>
 </html>
