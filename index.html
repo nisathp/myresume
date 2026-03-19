@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kannan Ramakrishnan | Android Developer Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #1e40af;
+            --text-dark: #111827;
+            --text-light: #374151;
+            --bg-gray: #f3f4f6;
+            --border: #d1d5db;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: var(--text-dark);
+            background-color: var(--bg-gray);
+            padding: 40px 15px;
+        }
+
+        /* Resume Wrapper for PDF generation */
+        #resume-content {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+
+        /* Download Button Styling */
+        .download-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+        .download-btn:hover { transform: scale(1.05); background-color: #1e3a8a; }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .name-title h1 { font-size: 2.2rem; color: var(--primary-color); text-transform: uppercase; }
+        .contact-info { text-align: right; font-size: 0.9rem; }
+        .contact-info a { color: var(--primary-color); text-decoration: none; }
+
+        /* Sections */
+        section { margin-bottom: 22px; }
+        h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 4px;
+            margin-bottom: 12px;
+        }
+
+        .skills-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .skills-table td { padding: 8px; border: 1px solid var(--border); }
+        .skill-category { background-color: #f9fafb; font-weight: bold; width: 30%; }
+
+        .exp-item { margin-bottom: 15px; }
+        .exp-header { display: flex; justify-content: space-between; font-weight: 700; }
+        .exp-sub { display: flex; justify-content: space-between; font-style: italic; color: var(--text-light); font-size: 0.9rem; margin-bottom: 5px; }
+        ul { padding-left: 20px; font-size: 0.9rem; color: var(--text-light); }
+        li { margin-bottom: 4px; }
+
+        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .project-card { padding: 10px; border: 1px solid var(--border); border-radius: 4px; }
+
+        /* PDF specific tweaks to prevent page breaks inside sections */
+        .exp-item, section { page-break-inside: avoid; }
+
+        @media (max-width: 650px) {
+            header { flex-direction: column; }
+            .contact-info { text-align: left; margin-top: 15px; }
+            .project-grid { grid-template-columns: 1fr; }
+            .download-btn { bottom: 20px; right: 20px; padding: 10px 18px; font-size: 0.8rem; }
+        }
+
+        @media print {
+            .download-btn { display: none; }
+            body { background: white; padding: 0; }
+            #resume-content { box-shadow: none; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="download-btn" onclick="generatePDF()">Download PDF CV</button>
+
+    <div id="resume-content">
+        <header>
+            <div class="name-title">
+                <h1>KANNAN R</h1>
+                <p>Android Developer | 4+ Years Experience</p>
+            </div>
+            <div class="contact-info">
+                <div>📞 7867952457</div>
+                <div>📧 <a href="mailto:kannanpvm007@gmail.com">kannanpvm007@gmail.com</a></div>
+                <div>🔗 <a href="#">GitHub</a> | <a href="#">Playstore</a></div>
+                <div>📍 Coimbatore, India</div>
+            </div>
+        </header>
+
+        <section>
+            <h2>Professional Summary</h2>
+            <p style="font-size: 0.95rem; text-align: justify; color: var(--text-light);">
+                Dynamic and results-driven Android Developer with 4+ years of experience, specializing in modern mobile development using <b>Kotlin, Jetpack Compose, MVVM, and Dagger-Hilt</b>. Proven expertise in building high-performance applications, integrating real-time data streaming (Kotlin Flow, Firebase), payment systems (Stripe), and location services.
+            </p>
+        </section>
+
+        <section>
+            <h2>Technical Skills</h2>
+            <table class="skills-table">
+                <tr>
+                    <td class="skill-category">Mobile Development</td>
+                    <td>Kotlin, Jetpack Compose, MVVM, Kotlin Flow, Compose Navigation, Material3</td>
+                </tr>
+                <tr>
+                    <td class="skill-category">Tools & Technologies</td>
+                    <td>Dagger-Hilt, Google Maps SDK, Firebase (Firestore, Remote Config), GitHub Actions, Git</td>
+                </tr>
+                <tr>
+                    <td class="skill-category">Backend & Databases</td>
+                    <td>Spring MVC, MySQL 5.0, Tomcat 8.5, WebSocket, MQTT</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Professional Experience</h2>
+            <div class="exp-item">
+                <div class="exp-header"><span>Android Developer</span><span>Oct 2021 – Present</span></div>
+                <div class="exp-sub"><span>Orane Healthcare India Pvt Ltd</span><span>Coimbatore</span></div>
+                <ul>
+                    <li>Spearheaded development using <b>Jetpack Compose</b> and <b>MVVM</b> architecture.</li>
+                    <li>Integrated <b>Firebase Firestore</b> for real-time telemedicine data management.</li>
+                    <li>Implemented <b>Google Maps SDK</b> and <b>Firebase Remote Config</b> for dynamic UI updates.</li>
+                </ul>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-header"><span>Android Developer</span><span>Nov 2020 – Sep 2021</span></div>
+                <div class="exp-sub"><span>Dotworld Technologies</span><span>Coimbatore</span></div>
+                <ul>
+                    <li>Developed clean-architecture applications using <b>Dagger-Hilt</b>.</li>
+                    <li>Implemented <b>WebSocket</b> and <b>MQTT</b> for real-time communication protocols.</li>
+                </ul>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-header"><span>Java Developer</span><span>Nov 2019 – Nov 2020</span></div>
+                <div class="exp-sub"><span>Anna Silicon Technology</span><span>Kumbakonam</span></div>
+                <ul>
+                    <li>Contributed to backend development using <b>Spring MVC</b> and <b>MySQL</b>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Key Mobile Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h4 style="color: var(--primary-color); font-size: 0.95rem;">iCliniq Telemedicine Suite</h4>
+                    <p style="font-size: 0.8rem; color: #666;">Firebase, Compose Navigation, Material3, Google Maps SDK</p>
+                </div>
+                <div class="project-card">
+                    <h4 style="color: var(--primary-color); font-size: 0.95rem;">Video Display Terminal (VDT)</h4>
+                    <p style="font-size: 0.8rem; color: #666;">Twilio library integration for real-time video communication</p>
+                </div>
+                <div class="project-card">
+                    <h4 style="color: var(--primary-color); font-size: 0.95rem;">Restaurant Robot</h4>
+                    <p style="font-size: 0.8rem; color: #666;">AI Interface using Android ML Kit & Google Dialogflow</p>
+                </div>
+                <div class="project-card">
+                    <h4 style="color: var(--primary-color); font-size: 0.95rem;">iCliniq First</h4>
+                    <p style="font-size: 0.8rem; color: #666;">Kotlin, MVVM, Stripe Payment integration</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <div class="exp-header"><span>BCA (Computer Applications)</span><span>2019</span></div>
+            <div class="exp-sub"><span>Marudupandiyar College, Thanjavur</span></div>
+        </section>
+    </div>
+
+    <script>
+        function generatePDF() {
+            const element = document.getElementById('resume-content');
+            const options = {
+                margin:       0.5,
+                filename:     'Kannan_Ramakrishnan_Resume.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            // New Promise-based usage:
+            html2pdf().set(options).from(element).save();
+        }
+    </script>
+</body>
+</html>
