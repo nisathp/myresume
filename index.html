@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kannan Ramakrishnan | Resume</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Kannan R - Android Developer Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* 1. RESET & BASE STYLES */
+        /* 1. அடிப்படையான அமைப்புகள் */
         :root {
             --primary: #1e40af;
             --text: #111827;
             --light: #4b5563;
-            --border: #e5e7eb;
+            --border: #d1d5db;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,90 +22,111 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 0;
+            padding: 20px 0;
         }
 
-        /* 2. THE RESUME CONTAINER (Web View) */
-        .resume-container {
-            width: 210mm; /* A4 Width */
-            min-height: 297mm; /* A4 Height */
+        /* 2. ஒற்றைப் பக்க கணக்கீடு (A4 Size) */
+        .resume-page {
+            width: 210mm;
+            height: 297mm;
             background: white;
-            padding: 15mm;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 12mm 15mm; /* ஓரங்கள் சரியாக இருக்க */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             color: var(--text);
             position: relative;
+            overflow: hidden; /* அடுத்த பக்கத்திற்குப் போகாமல் தடுக்க */
         }
 
-        /* 3. HEADER */
+        /* 3. தலைப்பு பகுதி */
         header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: flex-end;
             border-bottom: 2px solid var(--primary);
-            padding-bottom: 12px;
-            margin-bottom: 15px;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        .name-area h1 { font-size: 26pt; color: var(--primary); letter-spacing: -1px; line-height: 1; }
-        .name-area p { font-size: 11pt; font-weight: 600; margin-top: 5px; color: var(--light); }
+        .name-title h1 { 
+            font-size: 24pt; 
+            color: var(--primary); 
+            line-height: 1;
+            text-transform: uppercase;
+        }
+        .name-title p { 
+            font-size: 11pt; 
+            font-weight: 600; 
+            color: var(--light); 
+            margin-top: 4px;
+        }
 
-        .contact-area { text-align: right; font-size: 9pt; line-height: 1.5; }
-        .contact-area a { color: var(--primary); text-decoration: none; }
+        .contact-info { 
+            text-align: right; 
+            font-size: 8.5pt; 
+            line-height: 1.4; 
+        }
+        .contact-info a { color: var(--primary); text-decoration: none; }
 
-        /* 4. SECTIONS */
-        section { margin-bottom: 15px; width: 100%; }
+        /* 4. பிரிவுகள் (Sections) */
+        section { margin-bottom: 12px; }
+        
         h2 {
-            font-size: 11pt;
+            font-size: 10pt;
             text-transform: uppercase;
             color: var(--primary);
             border-bottom: 1px solid var(--border);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             padding-bottom: 2px;
             letter-spacing: 0.5px;
         }
 
-        p.summary { font-size: 9.5pt; text-align: justify; line-height: 1.4; color: var(--light); }
-
-        .skills-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
-        .skills-table td { padding: 6px 10px; border: 1px solid var(--border); font-size: 9pt; }
-        .skill-title { background: #f9fafb; font-weight: 700; width: 25%; }
-
-        .experience-item { margin-bottom: 12px; }
-        .exp-row-1 { display: flex; justify-content: space-between; font-weight: 700; font-size: 10pt; }
-        .exp-row-2 { display: flex; justify-content: space-between; font-style: italic; font-size: 9pt; color: var(--light); margin-bottom: 4px; }
-        
-        ul { padding-left: 18px; }
-        li { font-size: 9pt; color: var(--light); margin-bottom: 3px; }
-
-        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .project-card { border: 1px solid var(--border); padding: 8px; border-radius: 4px; }
-        .project-card h4 { font-size: 9.5pt; color: var(--primary); margin-bottom: 2px; }
-        .project-card p { font-size: 8.5pt; color: var(--light); }
-
-        /* 5. DOWNLOAD BUTTON */
-        .no-print-btn {
-            background: var(--primary);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        .summary { 
+            font-size: 9pt; 
+            text-align: justify; 
+            line-height: 1.4; 
+            color: var(--light); 
         }
 
-        /* 6. PRINT LOGIC - This fixes your "Starting at Half Page" issue */
+        /* 5. அட்டவணை மற்றும் பட்டியல் */
+        .skills-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+        .skills-table td { padding: 5px 8px; border: 1px solid var(--border); font-size: 8.5pt; }
+        .skill-head { background: #f9fafb; font-weight: 700; width: 25%; }
+
+        .exp-item { margin-bottom: 10px; }
+        .exp-row { display: flex; justify-content: space-between; font-weight: 700; font-size: 9.5pt; }
+        .exp-sub { display: flex; justify-content: space-between; font-style: italic; font-size: 8.5pt; color: var(--light); margin-bottom: 2px; }
+        
+        ul { padding-left: 15px; }
+        li { font-size: 8.5pt; color: var(--light); margin-bottom: 2px; }
+
+        /* 6. திட்டங்கள் (Projects) */
+        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .project-card { border: 1px solid var(--border); padding: 6px 10px; border-radius: 4px; }
+        .project-card h4 { font-size: 9pt; color: var(--primary); }
+        .project-card p { font-size: 8pt; color: var(--light); }
+
+        /* 7. பட்டன் அமைப்பு */
+        .download-btn {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        /* 8. PDF-க்காக அச்சிடும் முறை (Print Logic) */
         @media print {
             @page { size: A4; margin: 0; }
             body { background: white; padding: 0; margin: 0; }
-            .no-print-btn { display: none; }
-            .resume-container {
-                width: 100%;
-                height: 100%;
+            .download-btn { display: none; }
+            .resume-page {
                 box-shadow: none;
-                padding: 15mm; /* Controls the white space around the edges */
-                margin: 0;
+                width: 210mm;
+                height: 297mm;
+                padding: 10mm 15mm;
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -115,26 +136,26 @@
 </head>
 <body>
 
-    <button class="no-print-btn" onclick="window.print()">Download PDF (Press Save as PDF)</button>
+    <button class="download-btn" onclick="window.print()">Download Single Page PDF</button>
 
-    <div class="resume-container">
+    <div class="resume-page">
         <header>
-            <div class="name-area">
+            <div class="name-title">
                 <h1>KANNAN R [cite: 1]</h1>
                 <p>Android Developer | 4+ Years Experience [cite: 2]</p>
             </div>
-            <div class="contact-area">
+            <div class="contact-info">
                 <div>📞 7867952457 [cite: 3]</div>
-                <div>📧 <a href="mailto:kannanpvm007@gmail.com">kannanpvm007@gmail.com</a> [cite: 4]</div>
+                <div>📧 <a href="mailto:kannanpvm007@gmail.com">kannanpvm007@gmail.com [cite: 4]</a></div>
                 <div>🔗 GitHub | Playstore [cite: 5]</div>
-                <div>📍 Coimbatore, India</div>
+                <div>📍 Coimbatore, India [cite: 5]</div>
             </div>
         </header>
 
         <section>
             <h2>Professional Summary [cite: 6]</h2>
             <p class="summary">
-                Dynamic and results-driven Android Developer with 4+ years of experience, specializing in modern mobile development using <b>Kotlin, Jetpack Compose, MVVM, and Dagger-Hilt</b>. [cite: 7] Proven expertise in building high-performance applications, integrating real-time data streaming (Kotlin Flow, Firebase), payment systems (Stripe), and location services. [cite: 8]
+                Dynamic and results-driven Android Developer with 4+ years of experience, specializing in modern mobile development using <b>Kotlin, Jetpack Compose, MVVM, and Dagger-Hilt</b>[cite: 7]. Proven expertise in building high-performance applications, integrating real-time data streaming (Kotlin Flow, Firebase), payment systems (Stripe), and location services[cite: 8].
             </p>
         </section>
 
@@ -142,44 +163,44 @@
             <h2>Technical Skills [cite: 9]</h2>
             <table class="skills-table">
                 <tr>
-                    <td class="skill-title">Mobile Development</td>
+                    <td class="skill-head">Mobile Development [cite: 10]</td>
                     <td>Kotlin, Jetpack Compose, MVVM, Kotlin Flow, Compose Navigation, Material3 [cite: 10]</td>
                 </tr>
                 <tr>
-                    <td class="skill-title">Tools & Tech</td>
+                    <td class="skill-head">Tools & Tech [cite: 10]</td>
                     <td>Dagger-Hilt, Google Maps SDK, Firebase (Firestore, Remote Config), GitHub Actions, Git [cite: 10]</td>
                 </tr>
                 <tr>
-                    <td class="skill-title">Backend & DB</td>
-                    <td>Spring MVC, MySQL 5.0, Tomcat 8.5, WebSocket, MQTT [cite: 11, 12]</td>
+                    <td class="skill-head">Backend & DB [cite: 11]</td>
+                    <td>Spring MVC, MySQL 5.0, Tomcat 8.5, WebSocket, MQTT [cite: 12]</td>
                 </tr>
             </table>
         </section>
 
         <section>
             <h2>Professional Experience [cite: 13]</h2>
-            <div class="experience-item">
-                <div class="exp-row-1"><span>Orane Healthcare India Pvt Ltd [cite: 15]</span><span>Oct 2021 - Present [cite: 16]</span></div>
-                <div class="exp-row-2"><span>Android Developer [cite: 14]</span><span>Coimbatore [cite: 16]</span></div>
+            <div class="exp-item">
+                <div class="exp-row"><span>Orane Healthcare India Pvt Ltd [cite: 15]</span><span>Oct 2021 - Present [cite: 16]</span></div>
+                <div class="exp-sub"><span>Android Developer [cite: 14]</span><span>Coimbatore [cite: 16]</span></div>
                 <ul>
-                    <li>Spearheaded development using Jetpack Compose and MVVM architecture. [cite: 17]</li>
-                    <li>Integrated Firebase Firestore for real-time telemedicine data management. [cite: 18]</li>
-                    <li>Implemented Google Maps SDK and Firebase Remote Config for dynamic UI updates. [cite: 19]</li>
+                    <li>Spearheaded development using Jetpack Compose and MVVM architecture[cite: 17].</li>
+                    <li>Integrated Firebase Firestore for real-time telemedicine data management[cite: 18].</li>
+                    <li>Implemented Google Maps SDK and Firebase Remote Config for dynamic UI updates[cite: 19].</li>
                 </ul>
             </div>
 
-            <div class="experience-item">
-                <div class="exp-row-1"><span>Dotworld Technologies [cite: 22]</span><span>Nov 2020 - Sep 2021 [cite: 21]</span></div>
-                <div class="exp-row-2"><span>Android Developer [cite: 20]</span><span>Coimbatore [cite: 23]</span></div>
+            <div class="exp-item">
+                <div class="exp-row"><span>Dotworld Technologies [cite: 22]</span><span>Nov 2020 - Sep 2021 [cite: 21]</span></div>
+                <div class="exp-sub"><span>Android Developer [cite: 20]</span><span>Coimbatore [cite: 23]</span></div>
                 <ul>
-                    <li>Developed clean-architecture applications using Dagger-Hilt. [cite: 24]</li>
-                    <li>Implemented WebSocket and MQTT for real-time communication protocols. [cite: 25]</li>
+                    <li>Developed clean-architecture applications using Dagger-Hilt[cite: 24].</li>
+                    <li>Implemented WebSocket and MQTT for real-time communication protocols[cite: 25].</li>
                 </ul>
             </div>
 
-            <div class="experience-item">
-                <div class="exp-row-1"><span>Anna Silicon Technology [cite: 27]</span><span>Nov 2019 - Nov 2020 [cite: 28]</span></div>
-                <div class="exp-row-2"><span>Java Developer [cite: 26]</span><span>Kumbakonam [cite: 29]</span></div>
+            <div class="exp-item">
+                <div class="exp-row"><span>Anna Silicon Technology [cite: 27]</span><span>Nov 2019 - Nov 2020 [cite: 28]</span></div>
+                <div class="exp-sub"><span>Java Developer [cite: 26]</span><span>Kumbakonam [cite: 29]</span></div>
                 <ul>
                     <li>Backend development focusing on Spring MVC and database optimization.</li>
                 </ul>
@@ -189,17 +210,17 @@
         <section>
             <h2>Key Mobile Projects</h2>
             <div class="project-grid">
-                <div class="project-card"><h4>iCliniq Telemedicine</h4><p>Firebase, Compose, Maps SDK</p></div>
-                <div class="project-card"><h4>iCliniq First</h4><p>Kotlin, MVVM, Stripe Integration</p></div>
-                <div class="project-card"><h4>VDT Terminal</h4><p>Twilio Real-time Video</p></div>
-                <div class="project-card"><h4>Restaurant Robot</h4><p>ML Kit & Google Dialogflow</p></div>
+                <div class="project-card"><h4>iCliniq Telemedicine Suite</h4><p>Firebase, Compose, Google Maps SDK integration.</p></div>
+                <div class="project-card"><h4>iCliniq First</h4><p>Kotlin, MVVM, Stripe integration for payments.</p></div>
+                <div class="project-card"><h4>Video Display Terminal</h4><p>Twilio library for real-time video communication.</p></div>
+                <div class="project-card"><h4>Restaurant Robot</h4><p>AI interface using Android ML Kit & Dialogflow.</p></div>
             </div>
         </section>
 
         <section>
             <h2>Education</h2>
-            <div class="exp-row-1"><span>BCA (Computer Applications)</span><span>2019</span></div>
-            <div class="exp-row-2"><span>Marudupandiyar College, Thanjavur</span></div>
+            <div class="exp-row"><span>BCA (Computer Applications)</span><span>2019</span></div>
+            <div class="exp-sub"><span>Marudupandiyar College, Thanjavur</span></div>
         </section>
     </div>
 
